@@ -3,7 +3,6 @@ package Shapes
 import (
 	"fmt"
 	"image"
-	"image/color"
 	"image/draw"
 	"image/gif"
 	"os"
@@ -20,27 +19,19 @@ type ShapeContainer struct {
 	Shapes  [90]Shape
 }
 
-var palette color.Palette = color.Palette{
-	image.Transparent,
-	color.RGBA{0xFF, 0x00, 0x00, 255},
-}
-
 func (m ShapeContainer) Render() {
 	var images []*image.Paletted
 	var delays []int
 
 	for i, s := range m.Shapes {
-		fmt.Println(i)
+		fmt.Println(fmt.Sprint("rendering frame: ", i, " of ", len(m.Shapes)))
 		s.Update(m.Context)
 		img := m.Context.Image()
 		bounds := img.Bounds()
-
-		dst := image.NewPaletted(bounds, palette)
+		dst := image.NewPaletted(bounds, Plan9)
 		draw.Draw(dst, bounds, img, bounds.Min, draw.Src)
 		images = append(images, dst)
-		fmt.Println(images)
 		delays = append(delays, 10)
-
 	}
 
 	f, err := os.OpenFile("rgb.gif", os.O_WRONLY|os.O_CREATE, 0600)
