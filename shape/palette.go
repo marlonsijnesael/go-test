@@ -3,10 +3,10 @@ package Shapes
 import "image/color"
 
 type Color struct {
-	R float64
-	G float64
-	B float64
-	A float64
+	R int
+	G int
+	B int
+	A int
 }
 
 var Plan9 = []color.Color{

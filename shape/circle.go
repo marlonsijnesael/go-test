@@ -13,6 +13,6 @@ type Circle struct {
 
 func (c Circle) Update(dc gg.Context) {
 	dc.DrawCircle(c.X, c.Y, c.R)
-	dc.SetRGBA(c.Col.R, c.Col.G, c.Col.B, c.Col.B)
+	dc.SetRGBA255(c.Col.R, c.Col.G, c.Col.B, c.Col.B)
 	dc.Fill()
 }
